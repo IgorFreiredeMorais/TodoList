@@ -1,5 +1,5 @@
 import * as A from "./App.js";
-import Search from "./components/Search/Search.jsx";
+import InputTask from "./components/Input/InputTask.jsx";
 import List from "./components/List/List.jsx";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -22,12 +22,13 @@ function App() {
     }
   };
 
-  const addTask = async (newTask) => {
+  const addTask = async (newTask, newDescription) => {
     try {
       const response = await axios.post(
         "https://657a03561acd268f9afa92f5.mockapi.io/api/v1/todos",
         {
           name: newTask,
+          description: newDescription,
           completed: false,
         }
       );
@@ -70,7 +71,7 @@ function App() {
     <>
       <A.App>
         <A.Title>Lista de Tarefas</A.Title>
-        <Search onAddTask={addTask} />
+        <InputTask onAddTask={addTask} />
         <List
           tasks={tasks}
           onToggleTask={toggleTask}
